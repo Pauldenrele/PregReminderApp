@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -220,11 +221,142 @@
                     />
 
             </RelativeLayout>
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:id="@+id/repeatNo"
+                android:clickable="true"
+                android:onClick="setRepaeatNo"
+                android:background="?attr/selectableItemBackground"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/repeat_no_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_unfold_more_black_24dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@id/repeat_no_icon"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/repeat_no_text"
+                        android:textSize="15sp"
+                        android:text="Repetition Interval"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/set_repeat_no"
+                        />
+
+
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:id="@+id/repeatType"
+                android:clickable="true"
+                android:onClick="selecttRepaeatType"
+                android:background="?attr/selectableItemBackground"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/repeat_type_icon"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_centerVertical="true"
+                   android:src="@drawable/ic_subject_black_24dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@id/repeat_type_icon"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/repeat_type_text"
+                        android:textSize="15sp"
+                        android:text="Type of Repititions"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/set_repeat_type"
+                        />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
 
         </LinearLayout>
 
 
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/add_reminder_layout_top"
+        />
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/starred1"
+        android:clickable="true"
+        android:onClick="selectFab1"
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorPressed="@color/colorAccent"
+        fab:fab_icon = "@drawable/ic_notification_off_black_24dp"
+        android:layout_marginTop="168dp"
+        app:fab_size="normal"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/starred2"
+        android:clickable="true"
+        android:onClick="selectFab1"
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorPressed="@color/colorAccent"
+        fab:fab_icon = "@drawable/ic_notifications_black_24dp"
+        android:layout_marginTop="168dp"
+        app:fab_size="normal"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        />
 
 
 </RelativeLayout>
