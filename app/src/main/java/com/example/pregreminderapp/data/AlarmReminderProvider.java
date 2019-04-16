@@ -7,6 +7,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Switch;
 
 public class AlarmReminderProvider extends ContentProvider {
@@ -66,13 +67,51 @@ public class AlarmReminderProvider extends ContentProvider {
 
     @Override
     public String getType( Uri uri) {
-        return null;
+
+        final int match = sUriMacther.match(uri);
+        switch (match){
+            case REMINDER :
+                return AlarmReminderContract.AlarmReminderEntry.CONTENT_LIST_TYPE;
+            case REMINDER_ID:
+                return AlarmReminderContract.AlarmReminderEntry.CONTENT_ITEM_TYPE;
+                default:
+                    throw  new IllegalArgumentException("Unknown Uri" + uri +"Match" + match);
+
+        }
+
+
     }
 
 
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
-        return null;
+    public Uri insert(Uri uri, ContentValues values)
+    {
+        final int match = sUriMacther.match(uri);
+        switch (match){
+            case REMINDER:
+                return insertReminder(uri , values);
+                default:
+                    throw new IllegalArgumentException("Insertion is not supported for " + uri);
+
+        }
+
+    }
+
+    private Uri insertReminder(Uri uri, ContentValues values) {
+        SQLiteDatabase database = alarmReminderDbHelper.getWritableDatabase();
+        long id = database.insert(AlarmReminderContract.AlarmReminderEntry
+        .TABLE_NAME , null  , values);
+
+        if ( id == -1){
+            Log.e(LOG_TAG , "Failed to insert values " + uri);
+            return  null;
+
+        }
+        getContext().getContentResolver().notifyChange(uri , null);
+        return ContentUris.withAppendedId(uri , id);
+
+
+
     }
 
     @Override
