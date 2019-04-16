@@ -3,7 +3,7 @@ package com.example.pregreminderapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class AddReminderActivity extends AppCompatActivity {
+public class AddReminderActivity extends AppCompatActivity implements  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
