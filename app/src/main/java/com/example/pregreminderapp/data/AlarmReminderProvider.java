@@ -109,18 +109,58 @@ public class AlarmReminderProvider extends ContentProvider {
         }
         getContext().getContentResolver().notifyChange(uri , null);
         return ContentUris.withAppendedId(uri , id);
-
-
-
     }
 
     @Override
     public int delete( Uri uri,  String selection, String[] selectionArgs) {
-        return 0;
+
+        SQLiteDatabase database = alarmReminderDbHelper.getWritableDatabase();
+        int rowsDeleted;
+        final int match = sUriMacther.match(uri);
+        switch (match){
+            case REMINDER:
+                rowsDeleted = database.delete(AlarmReminderContract.AlarmReminderEntry.TABLE_NAME , selection , selectionArgs);
+                break;
+                default:
+                    throw new IllegalArgumentException("Deleting this row is not supported for " + uri);
+
+        }
+        if ( rowsDeleted!=0){
+            getContext().getContentResolver().notifyChange(uri  , null);
+
+        }
+        return rowsDeleted;
     }
 
     @Override
     public int update( Uri uri, ContentValues values,  String selection,  String[] selectionArgs) {
-        return 0;
+        final int match = sUriMacther.match(uri);
+        switch (match){
+            case REMINDER:
+                return  updateReminder(uri , values , selection , selectionArgs);
+            case REMINDER_ID:
+                selection = AlarmReminderContract.AlarmReminderEntry._ID + "=?";
+                selectionArgs = new String []{String.valueOf(ContentUris.parseId(uri))};
+                return updateReminder(uri ,values ,selection , selectionArgs);
+                default:
+                    throw  new IllegalArgumentException("Update is not supported for " + uri);
+
+
+        }
+
+    }
+
+    private int updateReminder(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        if (values.size() ==0){
+            return 0;
+        }
+        SQLiteDatabase database = alarmReminderDbHelper.getWritableDatabase();
+        int rowsupdated = database.update(AlarmReminderContract.AlarmReminderEntry.TABLE_NAME , values , selection , selectionArgs);
+
+        if(rowsupdated!=0){
+            getContext().getContentResolver().notifyChange(uri , null);
+
+        }
+        return  rowsupdated;
     }
 }
