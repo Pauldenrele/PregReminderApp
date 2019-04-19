@@ -10,8 +10,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -26,6 +29,8 @@ public class AddReminderActivity extends AppCompatActivity implements TimePicker
 
     private static final int EXISTING_VEHICLE_LOADER = 0;
 
+    private RelativeLayout relativeLayout;
+    private View view;
     private Toolbar mToolBar ;
     private EditText mTitleText;
     private TextView mDateText , mTimeText , mRepeatText , mRepeatNoText , mRepeatTypeText;
@@ -53,6 +58,19 @@ public class AddReminderActivity extends AppCompatActivity implements TimePicker
     private static final String KEY_REPEAT_TYPE ="repeat_type_key";
     private static final String KEY_ACTIVE = "active_key";
 
+    private static final long milMinute = 60000L;
+    private static final long milHour = 3600000L;
+    private static final long milDays = 86400000L;
+    private static final long milWeek = 604800000L;
+    private static final long milMonths = 2592000000L;
+
+    private View.OnTouchListener mTouchListener =new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            mVehiclehasChanged = true;
+            return false;
+        }
+    };
 
 
 
