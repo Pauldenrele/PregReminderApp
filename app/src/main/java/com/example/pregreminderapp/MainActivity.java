@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
 
         });
-          getLoaderManager().initLoader(VEHICLE_LOADER , null , this);
+          getLoaderManager().initLoader(VEHICLE_LOADER , null , (android.app.LoaderManager.LoaderCallbacks<Object>) this);
 
 
 
