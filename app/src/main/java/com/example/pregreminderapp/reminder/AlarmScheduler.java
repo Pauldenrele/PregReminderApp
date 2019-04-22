@@ -11,7 +11,7 @@ import com.example.pregreminderapp.data.AlarmReminderProvider;
 public class AlarmScheduler  {
 
     public void setAlarm (Context context , long alarmTime , Uri reminderTask){
-        AlarmManager alarmManager = AlarmManagerProvider.getAlarmManger(context);
+        AlarmManager alarmManager = AlarmManagerProvider.getAlarmManager(context);
         PendingIntent operation =ReminderAlarmService.getReminderPendingIntent(context , reminderTask);
 
         if(Build.VERSION.SDK_INT >=23){
@@ -26,6 +26,10 @@ public class AlarmScheduler  {
     }
     public void setRepeatAlarm(Context context , long alarmTime , Uri reminderTask , long RepeatTime){
         AlarmManager manager = AlarmManagerProvider.getAlarmManager(context);
+
+        PendingIntent operation = ReminderAlarmService.getReminderPendingIntent(context , reminderTask);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP ,alarmTime ,RepeatTime,  operation );
 
 
 
